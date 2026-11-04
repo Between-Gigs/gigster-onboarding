@@ -2,6 +2,8 @@
 
 User decisions: the public welcome comes before a Clerk registration/sign-in popup; after authentication the member edits the profile itself. Use the invitation's cream/forest/editorial style as the primary direction and preserve a green alternate. Desktop/mobile and light/dark are required. No test emails or campaigns may be sent until the user explicitly changes that instruction. GitHub Pages is the temporary preview; the existing production Clerk app requires a Between Gigs custom domain for live login. Minimum questions follow the supplied branded onboarding PDF; document-only prototype limitations are not user instructions.
 
+Invitation correction: the email must visually match the supplied poster exactly. Use the original opaque artwork linked to the landing page, with live HTML action/address/unsubscribe below and a complete plain-text alternative. Preserve the source poster for this unsent preview, including its concept/date stamp. Remove that small localized draft stamp from an approved production asset before future live delivery; preserve the rest of the composition. The current invitation uses the source image rather than a recreated headline or separate generated header photo.
+
 Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
 
 Before making substantial visual changes, use the Product Design plugin's `get-context` skill when the visual source is unclear or no longer matches the current goal. When the user gives durable prototype-specific design feedback, preferences, or decisions, record them in `AGENTS.md`.

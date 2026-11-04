@@ -2,6 +2,14 @@
 
 final result: passed
 
+## Invitation fidelity correction
+
+The user's later correction requires the email to match the supplied poster exactly. The invitation now uses the original opaque `public/assets/invitation-reference.png` as one linked responsive image; the original typography, logo, text layout, tool positions, and embedded button are preserved. Its bytes are identical to the approved source in `emails/static/craft-invitation-reference.png`, verified by the email checks. The prior generated header/rebuilt HTML headline is superseded for the invitation.
+
+Current evidence: `docs/qa/invitation-exact-desktop.png` at a 1280×1100 viewport; `docs/qa/invitation-exact-mobile.png` at 390×844; combined source/render comparison in `docs/qa/invitation-exact-comparison.png`. The desktop poster renders at600×784.47 CSS px; mobile at390×509.91. DOM width equals the mobile viewport, with no horizontal overflow. The displayed poster was compared with the source at the same scale. No actionable P0/P1/P2 fidelity differences remain; normal browser image resampling is expected.
+
+A separate live HTML button/address/unsubscribe footer sits below the unchanged artwork. The image link opens the public welcome, and the browser-view link now opens the actual email preview. Complete alt text and an explicit plain-text message preserve the content independently of HTML-to-text image extraction. No images were regenerated or retouched. The original concept/date stamp is intentionally retained for this unsent preview and must be locally removed from a final approved production asset before future live delivery. No emails were sent; actual inbox-client checks remain deferred.
+
 Scope: the GitHub Pages **browser preview** requested by the user. Live authentication on a Between Gigs custom domain, hosted persistence, and sending invitation emails are deliberately deferred. This pass does not claim a live account or inbox test.
 
 ## Source and evidence

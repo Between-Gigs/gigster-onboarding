@@ -12,7 +12,7 @@ Email invitation → public welcome → **Clerk registration/sign-in popup** →
 - `?preview=1&blank=1#/profile`: start with an empty profile; this draft saves separately from the illustrated sample.
 - `#/submitted`: confirmation; `#/discover`: six illustrative profiles with functioning search/filter/sort.
 - `#/studio`: connected funnel canvas, desktop/mobile/full-page previews, field labels and requirements, block ordering, schema export.
-- `public/email/invitation.html`: rendered email design preview. Text and buttons are real HTML.
+- `public/email/invitation.html`: exact supplied invitation artwork, linked to the landing page, with a live HTML action and legal footer below.
 
 Minimum questions: name, on-set craft, at least one proud credit, and services beyond the set. Photo, IMDb, starting rate, location, and bio are optional. Availability is a switch. There is no “Popular services” module; reviews are an honest future empty state.
 
@@ -34,7 +34,7 @@ Drafts and photos belong only to the signed-in user. Autosave and submit are ser
 
 ## Invitation email
 
-Approved sender: `Between Gigs <hello@between-gigs.com>`. Existing campaign footer: `11766 Wilshire Blvd, Los Angeles, CA 90025`. The template includes a plain-text version, a real CTA, footer, and recipient-specific unsubscribe support. Production sends require a configured API and unsubscribe secret. [Email setup](emails/README.md).
+Approved sender: `Between Gigs <hello@between-gigs.com>`. Existing campaign footer: `11766 Wilshire Blvd, Los Angeles, CA 90025`. The visual invitation now uses the exact original opaque poster; the artwork links to the landing page and a separate live HTML button/address/unsubscribe remain beneath it. Complete plain text and descriptive image alt text preserve the message when images are blocked. The poster's draft/date stamp is retained in this unsent preview; remove only that localized stamp from the final production asset before future delivery. Production sends require a configured API and unsubscribe secret. [Email setup](emails/README.md).
 
 **User instruction: do not send test emails or campaigns yet.** No emails were sent during this build. Browser dark-mode previews and structural checks do not replace Gmail, Outlook, and Apple Mail inbox verification once sending is authorized. No email client can be forced to preserve exact colors in every mode; the message remains readable without decorative images.
 

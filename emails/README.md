@@ -1,8 +1,10 @@
 # Between Gigs invitation
 
-`Invitation.tsx` follows the supplied cream-and-forest invitation. Its headline, body, button and footer are real text. The optional still-life image is decorative; the message and action remain usable when images are blocked. The source poster in `static/craft-invitation-reference.png` is a design reference only and is never sent as the email.
+`Invitation.tsx` displays the exact supplied cream-and-forest poster as one responsive, opaque PNG. Its typography, logo, photographic border, text layout and button remain identical to the source. The complete image links to the public welcome page. A separate live HTML button, physical address and unsubscribe footer sit below it, and `render.tsx` supplies a complete plain-text message independently of the image.
 
-The template uses presentational tables from React Email, inline pixel styles, system fonts with a Georgia headline, explicit colors, light color-scheme metadata, and Outlook.com color overrides. Email applications can still apply their own color transformations. Check an actual delivery in Gmail, Apple Mail and Outlook in both appearance modes before approving the final invitation; browser previews alone cannot verify their behavior.
+The template uses presentational tables from React Email, inline pixel styles, explicit colors, light color-scheme metadata, and Outlook.com color overrides. The opaque poster keeps the artwork's pixels together rather than relying on email-client font rendering. Image blocking is the main tradeoff: descriptive alt text, the live HTML action and the full plain-text message provide alternatives. Actual Gmail, Apple Mail and Outlook behavior still requires an authorized inbox test; browser previews alone cannot verify those clients.
+
+The poster's small concept/date line is intentionally preserved for this unsent preview. Before production, remove only that localized stamp (approximately x=308–666, y=1007–1045 in the 979×1280 source) from an approved final artwork. Do not remove a full horizontal band, which would break the surrounding tools and cable. `EMAIL_POSTER_URL` can point to that final PNG/JPEG without changing the email layout.
 
 ## Preview
 
@@ -12,7 +14,7 @@ From the project root:
 npx tsx scripts/export-email.tsx
 ```
 
-This writes `public/email/invitation.html` and `.txt`. The public export is explicitly marked **DESIGN PREVIEW · NOT SENT** by default. It includes the address already used in the approved campaign; a recipient-specific unsubscribe service must be configured before sending. No email is sent. Optional source assets are `public/assets/craft-still-life.png` and `public/assets/logo-email.png`; their public URLs are derived from `EMAIL_ASSET_BASE_URL` or `PUBLIC_APP_URL`.
+This writes `public/email/invitation.html` and `.txt`. The public export is explicitly marked **DESIGN PREVIEW · NOT SENT** by default. It includes the address already used in the approved campaign; a recipient-specific unsubscribe service must be configured before sending. No email is sent. The current poster is `public/assets/invitation-reference.png`, checked byte-for-byte against `static/craft-invitation-reference.png`. Its public URL is derived from `EMAIL_ASSET_BASE_URL` or `PUBLIC_APP_URL`, with an optional `EMAIL_POSTER_URL` override.
 
 To render a private dry run for one recipient:
 
@@ -35,6 +37,7 @@ Set these server-side values in `.env.local`, `.env`, or the process environment
 | `API_PUBLIC_URL` | Public HTTPS base of the Node API that handles unsubscribe requests |
 | `UNSUBSCRIBE_SECRET` | At least 32 bytes; exactly the same value as the API host |
 | `EMAIL_ASSET_BASE_URL` | Optional absolute public asset base, defaulting to the app base |
+| `EMAIL_POSTER_URL` | Optional exact PNG/JPEG artwork URL; use the clean final poster for production |
 
 The scripts also accept the app's existing names: `INVITATION_FROM`, `PHYSICAL_ADDRESS`, `PUBLIC_SITE_URL`, and `PUBLIC_API_URL` for the corresponding sender, address, site, and API settings.
 

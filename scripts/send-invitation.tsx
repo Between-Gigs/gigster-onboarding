@@ -37,10 +37,8 @@ const send = argv.includes('--send');
 const appBase = (process.env.PUBLIC_APP_URL || process.env.PUBLIC_SITE_URL || 'https://between-gigs.github.io/gigster-onboarding/').replace(/\/$/, '');
 const inviteUrl = `${appBase}/#/welcome`;
 const assetBase = (process.env.EMAIL_ASSET_BASE_URL || appBase).replace(/\/$/, '');
-let artUrl: string | undefined;
-try { await access(resolve('public/assets/craft-still-life.png')); artUrl = `${assetBase}/assets/craft-still-life.png`; } catch { /* Optional art. */ }
-let logoUrl: string | undefined;
-try { await access(resolve('public/assets/logo-email.png')); logoUrl = `${assetBase}/assets/logo-email.png`; } catch { /* Text logo fallback. */ }
+await access(resolve('public/assets/invitation-reference.png'));
+const posterUrl = process.env.EMAIL_POSTER_URL || assetBase + '/assets/invitation-reference.png';
 
 const jobDirectory = fileURLToPath(new URL('../.email-jobs/', import.meta.url));
 await mkdir(jobDirectory, { recursive: true });
@@ -49,7 +47,7 @@ await writeFile(resolve(jobDirectory, '.gitignore'), '*\n', 'utf8');
 if (!send) {
   const content = await renderInvitation({
     ...Invitation.PreviewProps,
-    inviteUrl, firstName, artUrl, logoUrl,
+    inviteUrl, firstName, posterUrl,
     physicalAddress: process.env.EMAIL_POSTAL_ADDRESS || process.env.PHYSICAL_ADDRESS || Invitation.PreviewProps.physicalAddress,
     previewOnly: true,
   });
@@ -70,8 +68,7 @@ const unsubscribeSecret = required('UNSUBSCRIBE_SECRET');
 if (Buffer.byteLength(unsubscribeSecret) < 32) throw new Error('UNSUBSCRIBE_SECRET must be at least 32 bytes and match the API host.');
 const apiBase = secureUrl(required('API_PUBLIC_URL', 'PUBLIC_API_URL'), 'API_PUBLIC_URL').toString().replace(/\/$/, '');
 secureUrl(inviteUrl, 'PUBLIC_APP_URL');
-if (artUrl) secureUrl(artUrl, 'EMAIL_ASSET_BASE_URL');
-if (logoUrl) secureUrl(logoUrl, 'EMAIL_ASSET_BASE_URL');
+secureUrl(posterUrl, 'EMAIL_POSTER_URL');
 
 type EmailPayload = {
   from: string; to: string[]; subject: string; html: string; text: string;
@@ -93,7 +90,7 @@ try {
   const { createUnsubscribeToken } = await import('../server/unsubscribe.mjs');
   const unsubscribeToken = createUnsubscribeToken({ email: to, topic: 'gigster-invitations' }, unsubscribeSecret);
   const unsubscribeUrl = `${apiBase}/api/unsubscribe?token=${encodeURIComponent(unsubscribeToken)}`;
-  const { html, text } = await renderInvitation({ inviteUrl, firstName, physicalAddress: address, unsubscribeUrl, artUrl, logoUrl });
+  const { html, text } = await renderInvitation({ inviteUrl, firstName, physicalAddress: address, unsubscribeUrl, posterUrl });
   job = {
     version: 1, campaign, recipient: to, createdAt: new Date().toISOString(),
     idempotencyKey: `gigster-invitation/${jobId}`, unsubscribeToken,

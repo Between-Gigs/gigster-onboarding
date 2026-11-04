@@ -22,16 +22,15 @@ if (production) {
     if (url.protocol !== 'https:' || url.username || url.password || /localhost|\.(invalid|example|test)$|^127\.|(^|\.)example\.(com|org|net)$/i.test(url.hostname)) throw new Error('Production email links must use public HTTPS URLs.');
   }
 }
-let artUrl: string | undefined;
-try { await access(resolve('public/assets/craft-still-life.png')); artUrl = `${assetBase}/assets/craft-still-life.png`; } catch { /* Email remains complete without decorative art. */ }
-let logoUrl: string | undefined;
-try { await access(resolve('public/assets/logo-email.png')); logoUrl = `${assetBase}/assets/logo-email.png`; } catch { /* Accessible text logo fallback. */ }
+await access(resolve('public/assets/invitation-reference.png'));
+const posterUrl = process.env.EMAIL_POSTER_URL || assetBase + '/assets/invitation-reference.png';
+
 const props = {
   ...Invitation.PreviewProps,
   inviteUrl: `${appBase.replace(/\/$/, '')}/#/welcome`,
   physicalAddress: address || Invitation.PreviewProps.physicalAddress,
   unsubscribeUrl: unsubscribeUrl || Invitation.PreviewProps.unsubscribeUrl,
-  artUrl, logoUrl, previewOnly: !production,
+  posterUrl, previewOnly: !production,
 };
 const { html, text } = await renderInvitation(props);
 const output = resolve('public/email');
