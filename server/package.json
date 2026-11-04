@@ -1,0 +1,15 @@
+{
+  "name": "@between-gigs/onboarding-api",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env index.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jose": "^6.1.0"
+  }
+}

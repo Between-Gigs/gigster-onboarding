@@ -1,0 +1,33 @@
+{
+  "name": "gigster-onboarding",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/prepare-sites-build.mjs",
+    "preview": "vite preview",
+    "server": "node --env-file-if-exists=.env server/index.mjs",
+    "test": "node --test tests/model.test.mjs && npm --prefix server test",
+    "email:export": "tsx scripts/export-email.tsx",
+    "test:sites": "node --test tests/sites-worker.test.mjs",
+    "email:check": "tsx scripts/check-email.tsx"
+  },
+  "dependencies": {
+    "@clerk/react": "^6.0.0",
+    "@vitejs/plugin-react": "5.0.4",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jose": "^6.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-easy-crop": "^5.5.0",
+    "react-email": "^6.11.6",
+    "tsx": "^4.20.0",
+    "vite": "6.4.2"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
