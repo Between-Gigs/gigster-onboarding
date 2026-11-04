@@ -39,6 +39,7 @@ No actionable P0/P1/P2 visual findings remain in the preview scope.
 - Searchable inspiration gallery; real file chooser; JPG/PNG/WebP selection; crop and save using the deployed preview.
 - Theme toggling and mobile layout, with DOM width and font/image loading checks.
 - Six searchable/clickable sample professionals; search narrows to the relevant craft.
+- Empty-profile preview: required questions show clear feedback; filling only name, craft, one service, and one credit reaches the review checkpoint. Its browser draft is separate from the illustrated sample. The fresh mobile start is captured in `docs/qa/blank-profile-mobile.png`.
 - Funnel card opens interactive preview; desktop/mobile and full-page controls work. Editing a question label is reflected in the profile; block reorder changes actual section/tab order. Reset restores defaults; JSON export is implemented.
 - Application source has no browser-console errors in these paths. Two MutationObserver errors appeared during browser instrumentation of changing iframe documents; no application code uses MutationObserver, and they did not affect the rendered preview or controls.
 

@@ -9,6 +9,7 @@ Email invitation → public welcome → **Clerk registration/sign-in popup** →
 - `#/welcome`: editorial public landing; `#/welcome-green`: green alternative.
 - `#/auth`, `#/register`: landing with account popup, for direct links.
 - `#/profile`: private account profile. Add `?preview=1` before the hash for a clearly labeled local demo.
+- `?preview=1&blank=1#/profile`: start with an empty profile; this draft saves separately from the illustrated sample.
 - `#/submitted`: confirmation; `#/discover`: six illustrative profiles with functioning search/filter/sort.
 - `#/studio`: connected funnel canvas, desktop/mobile/full-page previews, field labels and requirements, block ordering, schema export.
 - `public/email/invitation.html`: rendered email design preview. Text and buttons are real HTML.
